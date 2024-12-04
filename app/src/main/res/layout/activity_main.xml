@@ -15,12 +15,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:id="@+id/titleText"
+        <EditText
+            android:id="@+id/editTextText2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Welcome to Doreswamy and Yue's RUPizzeria"
-            android:textAlignment="center" />
+            android:ems="10"
+            android:inputType="text"
+            android:text="Welcome to Doreswamy's and Yue's RUPizzeria" />
 
         <ImageButton
             android:id="@+id/imageButton"
@@ -28,11 +29,23 @@
             android:layout_height="wrap_content"
             tools:srcCompat="@tools:sample/avatars" />
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="New York Style Pizza" />
+
         <ImageButton
             android:id="@+id/imageButton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Chicago Style Pizza" />
 
         <ImageButton
             android:id="@+id/imageButton3"
@@ -40,11 +53,23 @@
             android:layout_height="wrap_content"
             tools:srcCompat="@tools:sample/avatars" />
 
+        <TextView
+            android:id="@+id/textView3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Current Order" />
+
         <ImageButton
             android:id="@+id/imageButton4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             tools:srcCompat="@tools:sample/avatars" />
+
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Order History" />
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
