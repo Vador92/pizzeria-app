@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">rupizzeriaapp</string>
+    <string name="current_order">Current Order</string>
+    <string name="order_history">Order History</string>
+    <string name="welcome_message">RU Pizzeria</string>
+    <string name="order_history_button">Order History</string>
+    <string name="current_order_button">Current Order</string>
+    <string name="pizzas">Pizzas</string>
+    <string name="pizza_button">Pizzas</string>
 </resources>
