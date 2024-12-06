@@ -23,7 +23,7 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton"
+            android:id="@+id/NYStyleBuildYourOwn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -36,18 +36,18 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/editTextText2"
+                android:id="@+id/NYStyleBuildYourOwnTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="text"
-                android:text="Pizza Type" />
+                android:text="New York Style Build Your Own" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/NYStyleBuildYourOwnToppings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Toppings: Something" />
+                android:text="Toppings:" />
         </LinearLayout>
 
     </LinearLayout>
@@ -56,10 +56,11 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_weight="1"
+        android:clickable="true"
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton2"
+            android:id="@+id/NYStyleMeatzza"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -72,53 +73,19 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/editTextText2"
+                android:id="@+id/NYStyleMeatzzaTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="text"
-                android:text="Pizza Type" />
+                android:text="New York Style Meatzza" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/NYStyleMeatzzaToppings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Toppings: Something" />
-        </LinearLayout>
-    </LinearLayout>
+                android:text="Toppings: Sausage, Pepperoni, Beef, Ham" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/imageButton3"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/editTextText2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text"
-                android:text="Pizza Type" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Toppings: Something" />
         </LinearLayout>
     </LinearLayout>
 
@@ -129,7 +96,7 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton4"
+            android:id="@+id/NYStyleBBQChicken"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -142,18 +109,92 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/editTextText2"
+                android:id="@+id/NYStyleBBQChickenTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="text"
-                android:text="Pizza Type" />
+                android:text="New York Style BBQ Chicken" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/NYStyleBBQChickenToppings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Toppings: Something" />
+                android:text="Toppings: BBQ Chicken, Green Pepper, Provolone, Cheddar" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/NYStyleDeluxe"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/NYStyleDeluxeTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:text="New York Style Deluxe" />
+
+            <TextView
+                android:id="@+id/NYStyleDeluxeToppings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Toppings: Sausage, Pepperoni, Green Pepper, Onion, Mushroom" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ChicagoStyleBuildYourOwn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/ChicagoStyleBuildYourOwnTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:text="Chicago Style Build Your Own" />
+
+            <TextView
+                android:id="@+id/ChicagoStyleBuildYourOwnToppings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Toppings:" />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -164,7 +205,7 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton5"
+            android:id="@+id/ChicagoStyleMeatzza"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -177,18 +218,56 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/editTextText2"
+                android:id="@+id/ChicagoStyleMeatzzaTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="text"
-                android:text="Pizza Type" />
+                android:text="Chicago Style Meatzza" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/ChicagoStyleMeatzzaToppings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Toppings: Something" />
+                android:text="Toppings: Sausage, Pepperoni, Beef, Ham" />
+
+        </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:clickable="true"
+        android:orientation="horizontal">
+
+        <ImageButton
+            android:id="@+id/ChicagoStyleBBQChicken"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            tools:srcCompat="@tools:sample/avatars" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:orientation="vertical">
+
+            <EditText
+                android:id="@+id/ChicagoStyleBBQChickenTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="text"
+                android:text="Chicago Style BBQ Chicken" />
+
+            <TextView
+                android:id="@+id/ChicagoStyleBBQChickenToppings"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Toppings: BBQ Chicken, Green Pepper, Provolone, Cheddar" />
+
         </LinearLayout>
     </LinearLayout>
 
@@ -199,7 +278,7 @@
         android:orientation="horizontal">
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/ChicagoStyleDeluxe"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -212,88 +291,19 @@
             android:orientation="vertical">
 
             <EditText
-                android:id="@+id/editTextText2"
+                android:id="@+id/ChicagoStyleDeluxeTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
                 android:inputType="text"
-                android:text="Pizza Type" />
+                android:text="Chicago Style Deluxe" />
 
             <TextView
-                android:id="@+id/textView"
+                android:id="@+id/ChicagoStyleDeluxeToppings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Toppings: Something" />
-        </LinearLayout>
-    </LinearLayout>
+                android:text="Toppings: Sausage, Pepperoni, Green Pepper, Onion, Mushroom" />
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/imageButton7"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/editTextText2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text"
-                android:text="Pizza Type" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Toppings: Something" />
-        </LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:orientation="horizontal">
-
-        <ImageButton
-            android:id="@+id/imageButton8"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            tools:srcCompat="@tools:sample/avatars" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_weight="1"
-            android:orientation="vertical">
-
-            <EditText
-                android:id="@+id/editTextText2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="text"
-                android:text="Pizza Type" />
-
-            <TextView
-                android:id="@+id/textView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Toppings: Something" />
         </LinearLayout>
     </LinearLayout>
 
