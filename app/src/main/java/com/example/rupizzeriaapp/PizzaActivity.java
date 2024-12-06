@@ -1,6 +1,9 @@
 package com.example.rupizzeriaapp;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Button;
+
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +20,13 @@ public class PizzaActivity extends AppCompatActivity {
         setContentView(R.layout.activity_pizzas);
 
         pizzaRecyclerView = findViewById(R.id.pizzaRecyclerView);
+
+        Button backButton = findViewById(R.id.backButton);
+        backButton.setOnClickListener(v -> {
+            Intent intent = new Intent(PizzaActivity.this, MainActivity.class);
+            startActivity(intent);
+            finish(); // Optional: Finish the current activity
+        });
 
         List<Pizza> pizzas = createPizzaList();
         PizzaAdapter adapter = new PizzaAdapter(this, pizzas);
