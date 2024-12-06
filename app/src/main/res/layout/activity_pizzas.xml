@@ -1,114 +1,13 @@
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/pizzaContainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
-
-        <!-- New York Style Section -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="New York Style"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <ImageButton
-                android:id="@+id/NYStyleBuildYourOwn"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/nybuildyourown"
-                android:contentDescription="NY Build Your Own" />
-
-            <ImageButton
-                android:id="@+id/NYStyleMeatzza"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/nymeatzza"
-                android:contentDescription="NY Meatzza" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <ImageButton
-                android:id="@+id/NYStyleBBQChicken"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/nybbqchicken"
-                android:contentDescription="NY BBQ Chicken" />
-
-            <ImageButton
-                android:id="@+id/NYStyleDeluxe"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/nydeluxe"
-                android:contentDescription="NY Deluxe" />
-        </LinearLayout>
-
-        <!-- Chicago Style Section -->
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chicago Style"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <ImageButton
-                android:id="@+id/ChicagoStyleBuildYourOwn"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/chicagobuildyourown"
-                android:contentDescription="Chicago Build Your Own" />
-
-            <ImageButton
-                android:id="@+id/ChicagoStyleMeatzza"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/chicagomeatzza"
-                android:contentDescription="Chicago Meatzza" />
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center">
-
-            <ImageButton
-                android:id="@+id/ChicagoStyleBBQChicken"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/chicagobbqchicken"
-                android:contentDescription="Chicago BBQ Chicken" />
-
-            <ImageButton
-                android:id="@+id/ChicagoStyleDeluxe"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                android:src="@drawable/chicagodeluxe"
-                android:contentDescription="Chicago Deluxe" />
-        </LinearLayout>
-    </LinearLayout>
+        android:padding="8dp" />
 </ScrollView>
+

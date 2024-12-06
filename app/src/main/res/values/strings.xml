@@ -7,4 +7,6 @@
     <string name="current_order_button">Current Order</string>
     <string name="pizzas">Pizzas</string>
     <string name="pizza_button">Pizzas</string>
+    <string name="pizza_image">Pizza image</string>
+    <string name="pizza_title">Pizza Title</string>
 </resources>
