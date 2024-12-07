@@ -1,6 +1,5 @@
 package com.example.rupizzeriaapp;
 
-import android.app.AlertDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
@@ -11,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
@@ -46,9 +46,10 @@ public class PizzaDetailActivity extends AppCompatActivity {
 
         // Set pizza details
         String style = selectedPizza.toString().contains("Chicago") ? "Chicago Style" : "NY Style";
-        pizzaName.setText(String.format("%s %s", style, selectedPizza.getClass().getSimpleName()));
+        String type = selectedPizza.toString().split(" ")[0]; // Extract the first word (e.g., Deluxe)
+        pizzaName.setText(String.format("%s %s", style, type));
         pizzaCrust.setText(String.format("Crust: %s", selectedPizza.getCrust()));
-        pizzaImage.setImageResource(getPizzaImage(selectedPizza));
+        pizzaImage.setImageResource(getPizzaImage(type, style));
         updatePizzaPrice();
 
         // Setup size spinner
@@ -89,12 +90,11 @@ public class PizzaDetailActivity extends AppCompatActivity {
             // Add the pizza to the current order
             OrderManager.getInstance().getCurrentOrder().addPizza(selectedPizza);
 
-            // Show confirmation dialog
-            AlertDialog.Builder builder = new AlertDialog.Builder(this);
-            builder.setTitle("Pizza Added")
-                    .setMessage(String.format("%s has been added to your order.", selectedPizza.toString()))
+            // Show simple confirmation dialog
+            new AlertDialog.Builder(this)
+                    .setTitle("Added to Cart")
+                    .setMessage("Pizza added to your order.")
                     .setPositiveButton("OK", (dialog, which) -> {
-                        dialog.dismiss();
                         // Navigate back to PizzaActivity
                         Intent intent = new Intent(PizzaDetailActivity.this, PizzaActivity.class);
                         startActivity(intent);
@@ -122,9 +122,9 @@ public class PizzaDetailActivity extends AppCompatActivity {
                         // If topping wasn't added, show error dialog
                         if (selectedPizza.getToppings().size() == oldSize) {
                             checkBox.setChecked(false); // Undo the check
-                            AlertDialog.Builder builder = new AlertDialog.Builder(PizzaDetailActivity.this);
-                            builder.setTitle("Maximum Toppings Reached")
-                                    .setMessage("You can only select up to 7 toppings.")
+                            new AlertDialog.Builder(PizzaDetailActivity.this)
+                                    .setTitle("Limit Reached")
+                                    .setMessage("You can select up to 7 toppings.")
                                     .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
                                     .show();
                         }
@@ -144,26 +144,28 @@ public class PizzaDetailActivity extends AppCompatActivity {
         pizzaPrice.setText(String.format("$%.2f", selectedPizza.price()));
     }
 
-    private int getPizzaImage(Pizza pizza) {
-        if (pizza.toString().contains("Chicago")) {
-            if (pizza instanceof Deluxe) {
-                return R.drawable.chicagodeluxe;
-            } else if (pizza instanceof Meatzza) {
-                return R.drawable.chicagomeatzza;
-            } else if (pizza instanceof BBQChicken) {
-                return R.drawable.chicagobbqchicken;
-            } else {
-                return R.drawable.chicagobuildyourown;
+    private int getPizzaImage(String type, String style) {
+        if (style.equals("Chicago Style")) {
+            switch (type) {
+                case "Deluxe":
+                    return R.drawable.chicagodeluxe;
+                case "Meatzza":
+                    return R.drawable.chicagomeatzza;
+                case "BBQChicken":
+                    return R.drawable.chicagobbqchicken;
+                default:
+                    return R.drawable.chicagobuildyourown;
             }
         } else { // Assume NY Style
-            if (pizza instanceof Deluxe) {
-                return R.drawable.nydeluxe;
-            } else if (pizza instanceof Meatzza) {
-                return R.drawable.nymeatzza;
-            } else if (pizza instanceof BBQChicken) {
-                return R.drawable.nybbqchicken;
-            } else {
-                return R.drawable.nybuildyourown;
+            switch (type) {
+                case "Deluxe":
+                    return R.drawable.nydeluxe;
+                case "Meatzza":
+                    return R.drawable.nymeatzza;
+                case "BBQChicken":
+                    return R.drawable.nybbqchicken;
+                default:
+                    return R.drawable.nybuildyourown;
             }
         }
     }
