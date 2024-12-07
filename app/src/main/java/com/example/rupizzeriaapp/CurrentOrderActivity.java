@@ -10,8 +10,14 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
+/**
+ * This is the Current Order Activity class, which manages the frontend responses on the Current Order Page
+ * This class changes the data shown in the frontend based on the backend data processing
+ * @author Varun Doreswamy, Yuet Yue
+ */
 public class CurrentOrderActivity extends AppCompatActivity {
 
+    // Instance Variables
     private ListView currentCartList;
     private EditText cartSubTotal, cartTax, cartTotal;
     private TextView orderNumber;
@@ -19,12 +25,32 @@ public class CurrentOrderActivity extends AppCompatActivity {
     private ArrayAdapter<Pizza> adapter;
     private int selectedIndex = -1;
 
+    /**
+     * This method initializes the Current Order activity by setting up the:
+     * UI
+     * Event listeners
+     * Displaying the current order details
+     * @param savedInstanceState is the previous saved state of activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_current_order);
 
-        // Initialize UI components
+        // Initialize the UI and set up event listeners
+        initializeUIComponents();
+        setupBackButton();
+        setupListView();
+        setupButtonActions();
+
+        // Display the current order
+        updateOrderDisplay();
+    }
+
+    /**
+     * This method initializes UI components by linking them to their respective views
+     */
+    private void initializeUIComponents() {
         currentCartList = findViewById(R.id.currentCartList);
         cartSubTotal = findViewById(R.id.cartSubTotal);
         cartTax = findViewById(R.id.cartTax);
@@ -33,56 +59,82 @@ public class CurrentOrderActivity extends AppCompatActivity {
         removePizza = findViewById(R.id.removePizza);
         placeOrder = findViewById(R.id.placeOrder);
         clearOrder = findViewById(R.id.clearOrder);
+    }
 
-        // Display the current order
-        updateOrderDisplay();
-
-        // Initialize the Back Button
+    /**
+     * This method sets up the back button to close the activity when clicked
+     */
+    private void setupBackButton() {
         Button backButton = findViewById(R.id.backButton);
-
-        // Set OnClickListener for the Back Button
         backButton.setOnClickListener(v -> finish());
+    }
 
-        // Handle ListView item selection
+    /**
+     * This method configures the ListView to handle item selection and show feedback
+     */
+    private void setupListView() {
         currentCartList.setOnItemClickListener((parent, view, position, id) -> {
             selectedIndex = position;
             Toast.makeText(this, "Selected: " +
-                    OrderManager.getInstance().getCurrentOrder().getPizzas().get(position).toString(), Toast.LENGTH_SHORT).show();
-        });
-
-        // Remove the selected pizza
-        removePizza.setOnClickListener(v -> {
-            if (selectedIndex != -1) {
-                OrderManager.getInstance().getCurrentOrder().removePizza(
-                        OrderManager.getInstance().getCurrentOrder().getPizzas().get(selectedIndex)
-                );
-                selectedIndex = -1; // Reset selection
-                updateOrderDisplay();
-            } else {
-                Toast.makeText(this, "Please select a pizza to remove!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // Place the current order
-        placeOrder.setOnClickListener(v -> {
-            if (!OrderManager.getInstance().getCurrentOrder().getPizzas().isEmpty()) {
-                OrderManager.getInstance().placeCurrentOrder();
-                Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_SHORT).show();
-                updateOrderDisplay();
-            } else {
-                Toast.makeText(this, "No pizzas in the order to place!", Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        // Clear the entire order
-        clearOrder.setOnClickListener(v -> {
-            OrderManager.getInstance().cancelCurrentOrder();
-            Toast.makeText(this, "Order cleared!", Toast.LENGTH_SHORT).show();
-            updateOrderDisplay();
+                    OrderManager.getInstance().getCurrentOrder().getPizzas().get(position).toString(),
+                    Toast.LENGTH_SHORT).show();
         });
     }
 
-    // Update the ListView and price details
+    /**
+     * This method sets up the actions for the remove, place, and clear order buttons
+     */
+    private void setupButtonActions() {
+        // Remove the selected pizza
+        removePizza.setOnClickListener(v -> handleRemovePizza());
+
+        // Place the current order
+        placeOrder.setOnClickListener(v -> handlePlaceOrder());
+
+        // Clear the entire order
+        clearOrder.setOnClickListener(v -> handleClearOrder());
+    }
+
+    /**
+     * This method handles removing the selected pizza from the order
+     */
+    private void handleRemovePizza() {
+        if (selectedIndex != -1) {
+            OrderManager.getInstance().getCurrentOrder().removePizza(
+                    OrderManager.getInstance().getCurrentOrder().getPizzas().get(selectedIndex)
+            );
+            selectedIndex = -1; // Reset selection
+            updateOrderDisplay();
+        } else {
+            Toast.makeText(this, "Please select a pizza to remove!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * This method handles placing the current order
+     */
+    private void handlePlaceOrder() {
+        if (!OrderManager.getInstance().getCurrentOrder().getPizzas().isEmpty()) {
+            OrderManager.getInstance().placeCurrentOrder();
+            Toast.makeText(this, "Order placed successfully!", Toast.LENGTH_SHORT).show();
+            updateOrderDisplay();
+        } else {
+            Toast.makeText(this, "No pizzas in the order to place!", Toast.LENGTH_SHORT).show();
+        }
+    }
+
+    /**
+     * This method handles clearing the current order
+     */
+    private void handleClearOrder() {
+        OrderManager.getInstance().cancelCurrentOrder();
+        Toast.makeText(this, "Order cleared!", Toast.LENGTH_SHORT).show();
+        updateOrderDisplay();
+    }
+
+    /**
+     * This method updates the ListView and price details
+     */
     private void updateOrderDisplay() {
         Order currentOrder = OrderManager.getInstance().getCurrentOrder();
 

@@ -10,10 +10,20 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the Pizza Activity class, which manages the frontend responses on the Pizza Options Page
+ * This class changes the data shown in the frontend based on the backend data processing
+ * @author Varun Doreswamy, Yuet Yue
+ */
 public class PizzaActivity extends AppCompatActivity {
 
+    // Instance Variables
     private RecyclerView pizzaRecyclerView;
 
+    /**
+     * This method initializes the list of pizza types in a RecyclerView for users to see all pizza types
+     * @param savedInstanceState is the previous saved state of the activity
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,6 +45,10 @@ public class PizzaActivity extends AppCompatActivity {
         pizzaRecyclerView.setAdapter(adapter);
     }
 
+    /**
+     * This helper method adds the pizza types to a list that will be later initialized by another method
+     * @return the pizzas within the list
+     */
     private List<Pizza> createPizzaList() {
         List<Pizza> pizzas = new ArrayList<>();
         PizzaFactory chicagoFactory = new ChicagoPizza();
