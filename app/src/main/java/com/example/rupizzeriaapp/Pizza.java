@@ -1,12 +1,13 @@
 package com.example.rupizzeriaapp;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * The abstract class for the Pizza
  * @author Varun Doreswamy, Yuet Yue
  */
-public abstract class Pizza {
+public abstract class Pizza implements Serializable{
 
     // Constants
     private static final int MAX = 7;

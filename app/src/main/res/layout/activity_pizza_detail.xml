@@ -1,20 +1,77 @@
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:padding="16dp">
 
-    <TextView
-        android:id="@+id/pizzaName"
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textSize="24sp"
-        android:textStyle="bold"
-        android:paddingBottom="8dp" />
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/pizzaDetails"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="16sp" />
-</LinearLayout>
+        <!-- Pizza Image -->
+        <ImageView
+            android:id="@+id/pizzaImage"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Pizza Image" />
+
+        <!-- Pizza Name -->
+        <TextView
+            android:id="@+id/pizzaName"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Pizza Name"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:paddingTop="8dp"
+            android:paddingBottom="4dp" />
+
+        <!-- Pizza Price -->
+        <TextView
+            android:id="@+id/pizzaPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Price"
+            android:textSize="18sp"
+            android:paddingBottom="4dp" />
+
+        <!-- Pizza Crust -->
+        <TextView
+            android:id="@+id/pizzaCrust"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Crust"
+            android:textSize="16sp"
+            android:paddingBottom="8dp" />
+
+        <!-- Size Spinner -->
+        <Spinner
+            android:id="@+id/sizeSpinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="12dp"
+            android:background="@android:drawable/btn_dropdown"
+            android:textAlignment="center"
+            android:textSize="18sp"
+            android:layout_marginBottom="16dp" />
+
+
+        <!-- Toppings Container -->
+        <LinearLayout
+            android:id="@+id/toppingsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:paddingBottom="16dp" />
+
+        <!-- Add to Cart Button -->
+        <Button
+            android:id="@+id/addToCartButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add to Cart"
+            android:textColor="@android:color/white" />
+
+    </LinearLayout>
+</ScrollView>

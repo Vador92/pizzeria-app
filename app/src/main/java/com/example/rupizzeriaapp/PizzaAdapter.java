@@ -7,14 +7,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import java.util.List;
 
 public class PizzaAdapter extends RecyclerView.Adapter<PizzaAdapter.PizzaViewHolder> {
 
-    private final Context context;
-    private final List<Pizza> pizzaList;
+    private Context context;
+    private List<Pizza> pizzaList;
 
     public PizzaAdapter(Context context, List<Pizza> pizzaList) {
         this.context = context;
@@ -32,32 +34,20 @@ public class PizzaAdapter extends RecyclerView.Adapter<PizzaAdapter.PizzaViewHol
     public void onBindViewHolder(@NonNull PizzaViewHolder holder, int position) {
         Pizza pizza = pizzaList.get(position);
 
-        // Determine the style based on class name or toString
-        String style = pizza.toString().contains("NY") ? "NY Style" : "Chicago Style";
-
-        // Set text for name and toppings
+        // Bind pizza data to the UI
+        String style = pizza.toString().contains("Chicago") ? "Chicago Style" : "NY Style";
         holder.pizzaName.setText(String.format("%s %s", style, pizza.getClass().getSimpleName()));
-        if (pizza.getToppings().isEmpty()) {
-            holder.pizzaToppings.setText("Can choose up to 7 toppings");
-        } else {
-            holder.pizzaToppings.setText(pizza.getToppings().toString());
-        }
-
-
-        // Set the appropriate image
+        holder.pizzaToppings.setText(pizza.getToppings().isEmpty() ?
+                "Can choose up to 7 toppings" : pizza.getToppings().toString());
         holder.pizzaImage.setImageResource(getPizzaImage(pizza));
 
-        // Navigate to PizzaDetailActivity on click
+        // Set onClickListener for each pizza item
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, PizzaDetailActivity.class);
-            intent.putExtra("pizzaName", String.format("%s %s", style, pizza.getClass().getSimpleName()));
-            intent.putExtra("pizzaToppings", pizza.getToppings().toString());
-            intent.putExtra("pizzaSize", pizza.getSize().toString());
-            intent.putExtra("pizzaPrice", String.valueOf(pizza.price()));
+            intent.putExtra("selectedPizza", pizza); // Pass the Pizza object
             context.startActivity(intent);
         });
     }
-
 
     @Override
     public int getItemCount() {
@@ -65,29 +55,28 @@ public class PizzaAdapter extends RecyclerView.Adapter<PizzaAdapter.PizzaViewHol
     }
 
     private int getPizzaImage(Pizza pizza) {
-        // Check for NY Style Pizzas
-        if (pizza instanceof Deluxe && pizza.toString().contains("NY")) {
-            return R.drawable.nydeluxe; // Replace with NY Deluxe image resource ID
-        } else if (pizza instanceof Meatzza && pizza.toString().contains("NY")) {
-            return R.drawable.nymeatzza; // Replace with NY Meatzza image resource ID
-        } else if (pizza instanceof BBQChicken && pizza.toString().contains("NY")) {
-            return R.drawable.nybbqchicken; // Replace with NY BBQ Chicken image resource ID
-        } else if (pizza.toString().contains("NY")) {
-            return R.drawable.nybuildyourown; // Replace with NY Build Your Own image resource ID
-        }
-
-        // Check for Chicago Style Pizzas
-        if (pizza instanceof Deluxe && pizza.toString().contains("Chicago")) {
-            return R.drawable.chicagodeluxe; // Replace with Chicago Deluxe image resource ID
-        } else if (pizza instanceof Meatzza && pizza.toString().contains("Chicago")) {
-            return R.drawable.chicagomeatzza; // Replace with Chicago Meatzza image resource ID
-        } else if (pizza instanceof BBQChicken && pizza.toString().contains("Chicago")) {
-            return R.drawable.chicagobbqchicken; // Replace with Chicago BBQ Chicken image resource ID
+        if (pizza.toString().contains("Chicago")) {
+            if (pizza instanceof Deluxe) {
+                return R.drawable.chicagodeluxe;
+            } else if (pizza instanceof Meatzza) {
+                return R.drawable.chicagomeatzza;
+            } else if (pizza instanceof BBQChicken) {
+                return R.drawable.chicagobbqchicken;
+            } else {
+                return R.drawable.chicagobuildyourown;
+            }
         } else {
-            return R.drawable.chicagobuildyourown; // Replace with Chicago Build Your Own image resource ID
+            if (pizza instanceof Deluxe) {
+                return R.drawable.nydeluxe;
+            } else if (pizza instanceof Meatzza) {
+                return R.drawable.nymeatzza;
+            } else if (pizza instanceof BBQChicken) {
+                return R.drawable.nybbqchicken;
+            } else {
+                return R.drawable.nybuildyourown;
+            }
         }
     }
-
 
     public static class PizzaViewHolder extends RecyclerView.ViewHolder {
         TextView pizzaName, pizzaToppings;
