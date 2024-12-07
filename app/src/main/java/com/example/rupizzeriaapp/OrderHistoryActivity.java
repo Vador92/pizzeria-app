@@ -18,8 +18,13 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * This is the Order History Activity class, it manages the Order History Page and its backend processes
+ * @author Varun Doreswamy, Yuet Yue
+ */
 public class OrderHistoryActivity extends AppCompatActivity {
 
+    // Instance Variables
     private Spinner spinnerOrderNumber;
     private ListView listViewOrderSummary; // Replaced RecyclerView with ListView
     private TextView textViewOrderTotal;
@@ -31,6 +36,13 @@ public class OrderHistoryActivity extends AppCompatActivity {
     private List<Order> placedOrders;
     private Order selectedOrder;
 
+    /**
+     * This is the create method that manages the frontend application reponses based on the backend data processes
+     * @param savedInstanceState If the activity is being re-initialized after
+     *     previously being shut down then this Bundle contains the data it most
+     *     recently supplied in {@link #onSaveInstanceState}.  <b><i>Note: Otherwise it is null.</i></b>
+     *
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -58,41 +70,37 @@ public class OrderHistoryActivity extends AppCompatActivity {
         buttonExportOrders.setOnClickListener(v -> exportOrders());
     }
 
+    /**
+     * This method sets up the List View
+     */
     private void setUpListView() {
         listAdapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, new ArrayList<>());
         listViewOrderSummary.setAdapter(listAdapter);
     }
 
+    /**
+     * This method sets up the Spinner
+     */
     private void setUpSpinner() {
-        // Ensure placedOrders is not null
         if (placedOrders == null) {
             placedOrders = new ArrayList<>();
         }
-
-        // Prepare the list of order numbers
         List<Integer> orderNumbers = new ArrayList<>();
         for (Order order : placedOrders) {
             if (order != null) {
                 orderNumbers.add(order.getNumber());
             }
         }
-
-        // Check if there are no orders
         if (orderNumbers.isEmpty()) {
             Toast.makeText(this, "No orders available", Toast.LENGTH_SHORT).show();
             spinnerOrderNumber.setEnabled(false);
             spinnerOrderNumber.setAdapter(null); // Clear adapter
             return;
         }
-
-        // Enable spinner if orders are available
         spinnerOrderNumber.setEnabled(true);
-
-        // Create and set the spinner adapter
         spinnerAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, orderNumbers);
         spinnerAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         spinnerOrderNumber.setAdapter(spinnerAdapter);
-
         spinnerOrderNumber.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -101,19 +109,19 @@ public class OrderHistoryActivity extends AppCompatActivity {
                     selectOrder(selectedOrderNumber);
                 }
             }
-
             @Override
             public void onNothingSelected(AdapterView<?> parent) {
-                // No action needed
             }
         });
-
-        // Select the first order by default if available
         if (!orderNumbers.isEmpty()) {
             selectOrder(orderNumbers.get(0));
         }
     }
 
+    /**
+     * This method selects the order based on the order number
+     * @param orderNumber the unique order ID associated with an order
+     */
     private void selectOrder(int orderNumber) {
         for (Order order : placedOrders) {
             if (order.getNumber() == orderNumber) {
@@ -124,6 +132,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
         updateOrderDetails();
     }
 
+    /**
+     * This method updates the details of the specified order
+     */
     private void updateOrderDetails() {
         if (selectedOrder != null && selectedOrder.getPizzas() != null) {
             List<String> pizzaDescriptions = new ArrayList<>();
@@ -139,6 +150,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method cancels the order
+     */
     private void cancelOrder() {
         if (selectedOrder != null) {
             placedOrders.remove(selectedOrder);
@@ -149,6 +163,9 @@ public class OrderHistoryActivity extends AppCompatActivity {
         }
     }
 
+    /**
+     * This method exports the placed orders onto a txt file
+     */
     private void exportOrders() {
         if (placedOrders.isEmpty()) {
             Toast.makeText(this, "No orders to export!", Toast.LENGTH_SHORT).show();
