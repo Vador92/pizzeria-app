@@ -7,6 +7,8 @@ import java.util.ArrayList;
  * @author Varun Doreswamy, Yuet Yue
  */
 public class OrderManager {
+
+    // Instance Variables
     private static OrderManager instance; // Singleton instance
     private ArrayList<Order> orders;           // Holds all placed orders
     private Order currentOrder;           // Holds the current active order
