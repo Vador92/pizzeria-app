@@ -1,0 +1,283 @@
+Index: app/src/main/java/com/example/rupizzeriaapp/OrderManager.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.rupizzeriaapp;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class OrderManager {\r\n    private static OrderManager instance; // Singleton instance\r\n    private ArrayList<Order> orders;           // Holds all placed orders\r\n    private Order currentOrder;           // Holds the current active order\r\n    private int orderId;                  // Auto-incremented order ID\r\n\r\n    // Private constructor to prevent instantiation\r\n    private OrderManager() {\r\n        orders = new ArrayList<>();\r\n        orderId = 1;\r\n        currentOrder = new Order(orderId, new ArrayList<>());\r\n    }\r\n\r\n    // Public method to access the Singleton instance\r\n    public static synchronized OrderManager getInstance() {\r\n        if (instance == null) {\r\n            instance = new OrderManager();\r\n        }\r\n        return instance;\r\n    }\r\n\r\n    public Order getCurrentOrder() {\r\n        return currentOrder;\r\n    }\r\n\r\n    public ArrayList<Order> getOrders() {\r\n        return orders;\r\n    }\r\n\r\n    public void placeCurrentOrder() {\r\n        if (currentOrder != null && !currentOrder.getPizzas().isEmpty()) {\r\n            orders.add(currentOrder);         // Add current order to the list\r\n            orderId++;                        // Increment order ID\r\n            currentOrder = new Order(orderId, new ArrayList<>()); // Reset for new order\r\n        }\r\n    }\r\n\r\n    public void cancelCurrentOrder() {\r\n        currentOrder = new Order(orderId, new ArrayList<>()); // Reset the current order\r\n    }\r\n\r\n    public void addPizzaToCurrentOrder(Pizza pizza) {\r\n        currentOrder.addPizza(pizza); // Add pizza to the current order\r\n    }\r\n\r\n    public void removePizzaFromCurrentOrder(Pizza pizza) {\r\n        currentOrder.removePizza(pizza); // Remove pizza from the current order\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/rupizzeriaapp/OrderManager.java b/app/src/main/java/com/example/rupizzeriaapp/OrderManager.java
+--- a/app/src/main/java/com/example/rupizzeriaapp/OrderManager.java	(revision d9aaa3e95d0ff64d120e8fb85e0bbabc815890d4)
++++ b/app/src/main/java/com/example/rupizzeriaapp/OrderManager.java	(date 1733543134512)
+@@ -1,21 +1,31 @@
+ package com.example.rupizzeriaapp;
+ 
+ import java.util.ArrayList;
++import java.util.List;
+ 
++/**
++ * This is the Order Manager class it manages all the placed orders, current orders, and order IDs
++ * @author Varun Doreswamy, Yuet Yue
++ */
+ public class OrderManager {
+     private static OrderManager instance; // Singleton instance
+     private ArrayList<Order> orders;           // Holds all placed orders
+     private Order currentOrder;           // Holds the current active order
+     private int orderId;                  // Auto-incremented order ID
+ 
+-    // Private constructor to prevent instantiation
++    /**
++     * This is the default constructor that creates a placed order object with an assigned ID
++     */
+     private OrderManager() {
+         orders = new ArrayList<>();
+         orderId = 1;
+         currentOrder = new Order(orderId, new ArrayList<>());
+     }
+ 
+-    // Public method to access the Singleton instance
++    /**
++     * This method provides access to the Singleton instance of the Order Manager
++     * @return the Singleton instance of the Order Manager
++     */
+     public static synchronized OrderManager getInstance() {
+         if (instance == null) {
+             instance = new OrderManager();
+@@ -23,14 +33,28 @@
+         return instance;
+     }
+ 
++    /**
++     * This is the getter method for the current order
++     * @return the current order the user is working on
++     */
+     public Order getCurrentOrder() {
+         return currentOrder;
+     }
+ 
++    /**
++     * This is the getter method for the list of all placed orders
++     * @return the list of all orders
++     */
+     public ArrayList<Order> getOrders() {
+         return orders;
+     }
+ 
++    /**
++     * This method places the current order by:
++     * Adding it to the list of placed orders
++     * Incrementing the order ID
++     * Creates a new current order
++     */
+     public void placeCurrentOrder() {
+         if (currentOrder != null && !currentOrder.getPizzas().isEmpty()) {
+             orders.add(currentOrder);         // Add current order to the list
+@@ -39,14 +63,25 @@
+         }
+     }
+ 
++    /**
++     * This method cancels the current order by resetting it while retaining the current order ID
++     */
+     public void cancelCurrentOrder() {
+         currentOrder = new Order(orderId, new ArrayList<>()); // Reset the current order
+     }
+ 
++    /**
++     * This method adds a pizza to the current order
++     * @param pizza is the pizza that is going to be added to the current order
++     */
+     public void addPizzaToCurrentOrder(Pizza pizza) {
+         currentOrder.addPizza(pizza); // Add pizza to the current order
+     }
+ 
++    /**
++     * This method removes a pizza from the current order
++     * @param pizza is the pizza that is going to be added to the current order
++     */
+     public void removePizzaFromCurrentOrder(Pizza pizza) {
+         currentOrder.removePizza(pizza); // Remove pizza from the current order
+     }
+Index: app/src/main/java/com/example/rupizzeriaapp/PizzaDetailActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.example.rupizzeriaapp;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.widget.ArrayAdapter;\r\nimport android.widget.Button;\r\nimport android.widget.CheckBox;\r\nimport android.widget.ImageView;\r\nimport android.widget.LinearLayout;\r\nimport android.widget.Spinner;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.appcompat.app.AlertDialog;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class PizzaDetailActivity extends AppCompatActivity {\r\n\r\n    private Pizza selectedPizza;\r\n    private TextView pizzaName, pizzaPrice, pizzaCrust;\r\n    private ImageView pizzaImage;\r\n    private Spinner sizeSpinner;\r\n    private LinearLayout toppingsContainer;\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_pizza_detail);\r\n\r\n        // Bind UI components\r\n        pizzaName = findViewById(R.id.pizzaName);\r\n        pizzaPrice = findViewById(R.id.pizzaPrice);\r\n        pizzaCrust = findViewById(R.id.pizzaCrust);\r\n        pizzaImage = findViewById(R.id.pizzaImage);\r\n        sizeSpinner = findViewById(R.id.sizeSpinner);\r\n        toppingsContainer = findViewById(R.id.toppingsContainer);\r\n        Button addToCartButton = findViewById(R.id.addToCartButton);\r\n\r\n        // Initialize the Back Button\r\n        Button backButton = findViewById(R.id.backButton);\r\n\r\n        // Set OnClickListener for the Back Button\r\n        backButton.setOnClickListener(v -> finish());\r\n\r\n        // Get the selected pizza from Intent\r\n        selectedPizza = (Pizza) getIntent().getSerializableExtra(\"selectedPizza\");\r\n        if (selectedPizza == null) {\r\n            finish();\r\n            return;\r\n        }\r\n\r\n        // Set pizza details\r\n        String style = selectedPizza.toString().contains(\"Chicago\") ? \"Chicago Style\" : \"NY Style\";\r\n        String type = selectedPizza.toString().split(\" \")[0]; // Extract the first word (e.g., Deluxe)\r\n        pizzaName.setText(String.format(\"%s %s\", style, type));\r\n        pizzaCrust.setText(String.format(\"Crust: %s\", selectedPizza.getCrust()));\r\n        pizzaImage.setImageResource(getPizzaImage(type, style));\r\n        updatePizzaPrice();\r\n\r\n        // Setup size spinner\r\n        ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(this,\r\n                android.R.layout.simple_spinner_item, new String[]{\"SMALL\", \"MEDIUM\", \"LARGE\"});\r\n        sizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);\r\n        sizeSpinner.setAdapter(sizeAdapter);\r\n\r\n        // Handle size changes\r\n        sizeSpinner.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {\r\n            @Override\r\n            public void onItemSelected(android.widget.AdapterView<?> parent, android.view.View view, int position, long id) {\r\n                String size = parent.getItemAtPosition(position).toString();\r\n                switch (size) {\r\n                    case \"SMALL\":\r\n                        selectedPizza.setSize(Size.SMALL);\r\n                        break;\r\n                    case \"MEDIUM\":\r\n                        selectedPizza.setSize(Size.MEDIUM);\r\n                        break;\r\n                    case \"LARGE\":\r\n                        selectedPizza.setSize(Size.LARGE);\r\n                        break;\r\n                }\r\n                updatePizzaPrice();\r\n            }\r\n\r\n            @Override\r\n            public void onNothingSelected(android.widget.AdapterView<?> parent) {\r\n            }\r\n        });\r\n\r\n        // Initialize toppings\r\n        initializeToppings();\r\n\r\n        // Handle \"Add to Cart\" button\r\n        addToCartButton.setOnClickListener(v -> {\r\n            // Add the pizza to the current order\r\n            OrderManager.getInstance().getCurrentOrder().addPizza(selectedPizza);\r\n\r\n            // Show confirmation\r\n            new AlertDialog.Builder(this)\r\n                    .setTitle(\"Added to Cart\")\r\n                    .setMessage(\"Pizza added to your current order.\")\r\n                    .setPositiveButton(\"OK\", (dialog, which) -> dialog.dismiss())\r\n                    .show();\r\n        });\r\n    }\r\n\r\n    private void initializeToppings() {\r\n        toppingsContainer.removeAllViews();\r\n        for (Topping topping : Topping.values()) {\r\n            CheckBox checkBox = new CheckBox(this);\r\n            checkBox.setText(topping.toString());\r\n            checkBox.setEnabled(selectedPizza instanceof BuildYourOwn);\r\n            checkBox.setChecked(selectedPizza.getToppings().contains(topping));\r\n\r\n            // Handle toppings selection for BuildYourOwn\r\n            if (selectedPizza instanceof BuildYourOwn) {\r\n                checkBox.setOnCheckedChangeListener((buttonView, isChecked) -> {\r\n                    if (isChecked) {\r\n                        int oldSize = selectedPizza.getToppings().size();\r\n                        selectedPizza.addTopping(topping);\r\n\r\n                        // If topping wasn't added, show error dialog\r\n                        if (selectedPizza.getToppings().size() == oldSize) {\r\n                            checkBox.setChecked(false); // Undo the check\r\n                            new AlertDialog.Builder(PizzaDetailActivity.this)\r\n                                    .setTitle(\"Limit Reached\")\r\n                                    .setMessage(\"You can select up to 7 toppings.\")\r\n                                    .setPositiveButton(\"OK\", (dialog, which) -> dialog.dismiss())\r\n                                    .show();\r\n                        }\r\n                    } else {\r\n                        selectedPizza.removeTopping(topping);\r\n                    }\r\n                    updatePizzaPrice();\r\n                });\r\n            }\r\n\r\n            // Add the checkbox to the container\r\n            toppingsContainer.addView(checkBox);\r\n        }\r\n    }\r\n\r\n    private void updatePizzaPrice() {\r\n        pizzaPrice.setText(String.format(\"$%.2f\", selectedPizza.price()));\r\n    }\r\n\r\n    private int getPizzaImage(String type, String style) {\r\n        if (style.equals(\"Chicago Style\")) {\r\n            switch (type) {\r\n                case \"Deluxe\":\r\n                    return R.drawable.chicagodeluxe;\r\n                case \"Meatzza\":\r\n                    return R.drawable.chicagomeatzza;\r\n                case \"BBQChicken\":\r\n                    return R.drawable.chicagobbqchicken;\r\n                default:\r\n                    return R.drawable.chicagobuildyourown;\r\n            }\r\n        } else { // Assume NY Style\r\n            switch (type) {\r\n                case \"Deluxe\":\r\n                    return R.drawable.nydeluxe;\r\n                case \"Meatzza\":\r\n                    return R.drawable.nymeatzza;\r\n                case \"BBQChicken\":\r\n                    return R.drawable.nybbqchicken;\r\n                default:\r\n                    return R.drawable.nybuildyourown;\r\n            }\r\n        }\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/app/src/main/java/com/example/rupizzeriaapp/PizzaDetailActivity.java b/app/src/main/java/com/example/rupizzeriaapp/PizzaDetailActivity.java
+--- a/app/src/main/java/com/example/rupizzeriaapp/PizzaDetailActivity.java	(revision d9aaa3e95d0ff64d120e8fb85e0bbabc815890d4)
++++ b/app/src/main/java/com/example/rupizzeriaapp/PizzaDetailActivity.java	(date 1733543050656)
+@@ -15,56 +15,107 @@
+ 
+ import java.util.ArrayList;
+ 
++/**
++ * This is the Pizza Detail Activity class, it handles the detailed information page of the selected pizza
++ * @author Varun Doreswamy, Yuet Yue
++ */
+ public class PizzaDetailActivity extends AppCompatActivity {
+ 
++    // Instance Variables
+     private Pizza selectedPizza;
+     private TextView pizzaName, pizzaPrice, pizzaCrust;
+     private ImageView pizzaImage;
+     private Spinner sizeSpinner;
+     private LinearLayout toppingsContainer;
+ 
++    /**
++     * This method initializes the Pizza Detail Activity by:
++     * Setting up UI components
++     * Retrieving the selected Pizza from previous activity
++     * Giving users the ability to customize their selected Pizza
++     * @param savedInstanceState is the previous saved state of activity
++     */
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         setContentView(R.layout.activity_pizza_detail);
+ 
+-        // Bind UI components
++        // Initialize UI components
++        initializeUIComponents();
++
++        // Set up the back button listener
++        setupBackButton();
++
++        // Retrieve and validate the selected pizza from Intent
++        if (!retrieveSelectedPizza()) {
++            finish();
++            return;
++        }
++
++        // Display pizza details
++        displayPizzaDetails();
++
++        // Set up the size spinner
++        setupSizeSpinner();
++
++        // Initialize toppings selection
++        initializeToppings();
++
++        // Set up the "Add to Cart" button
++        setupAddToCartButton();
++    }
++
++    /**
++     * This method initializes UI components by linking them to their corresponding views
++     */
++    private void initializeUIComponents() {
+         pizzaName = findViewById(R.id.pizzaName);
+         pizzaPrice = findViewById(R.id.pizzaPrice);
+         pizzaCrust = findViewById(R.id.pizzaCrust);
+         pizzaImage = findViewById(R.id.pizzaImage);
+         sizeSpinner = findViewById(R.id.sizeSpinner);
+         toppingsContainer = findViewById(R.id.toppingsContainer);
+-        Button addToCartButton = findViewById(R.id.addToCartButton);
++    }
+ 
+-        // Initialize the Back Button
++    /**
++     * This method sets up the back button to finish the activity when clicked
++     */
++    private void setupBackButton() {
+         Button backButton = findViewById(R.id.backButton);
+-
+-        // Set OnClickListener for the Back Button
+         backButton.setOnClickListener(v -> finish());
++    }
+ 
+-        // Get the selected pizza from Intent
++    /**
++     * This method retrieves the selected pizza passed via the Intent and validates it
++     *
++     * @return true if the pizza is successfully retrieved, false otherwise.
++     */
++    private boolean retrieveSelectedPizza() {
+         selectedPizza = (Pizza) getIntent().getSerializableExtra("selectedPizza");
+-        if (selectedPizza == null) {
+-            finish();
+-            return;
+-        }
++        return selectedPizza != null;
++    }
+ 
+-        // Set pizza details
++    /**
++     * This method displays the details of the selected pizza, such as its name, crust, image, and price
++     */
++    private void displayPizzaDetails() {
+         String style = selectedPizza.toString().contains("Chicago") ? "Chicago Style" : "NY Style";
+         String type = selectedPizza.toString().split(" ")[0]; // Extract the first word (e.g., Deluxe)
+         pizzaName.setText(String.format("%s %s", style, type));
+         pizzaCrust.setText(String.format("Crust: %s", selectedPizza.getCrust()));
+         pizzaImage.setImageResource(getPizzaImage(type, style));
+         updatePizzaPrice();
++    }
+ 
+-        // Setup size spinner
++    /**
++     * This method sets up the size spinner to allow size selection and update the pizza price accordingly
++     */
++    private void setupSizeSpinner() {
+         ArrayAdapter<String> sizeAdapter = new ArrayAdapter<>(this,
+                 android.R.layout.simple_spinner_item, new String[]{"SMALL", "MEDIUM", "LARGE"});
+         sizeAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+         sizeSpinner.setAdapter(sizeAdapter);
+ 
+-        // Handle size changes
+         sizeSpinner.setOnItemSelectedListener(new android.widget.AdapterView.OnItemSelectedListener() {
+             @Override
+             public void onItemSelected(android.widget.AdapterView<?> parent, android.view.View view, int position, long id) {
+@@ -87,16 +138,16 @@
+             public void onNothingSelected(android.widget.AdapterView<?> parent) {
+             }
+         });
++    }
+ 
+-        // Initialize toppings
+-        initializeToppings();
+-
+-        // Handle "Add to Cart" button
++    /**
++     * This method sets up the "Add to Cart" button to add the selected pizza to the current order
++     */
++    private void setupAddToCartButton() {
++        Button addToCartButton = findViewById(R.id.addToCartButton);
+         addToCartButton.setOnClickListener(v -> {
+-            // Add the pizza to the current order
+             OrderManager.getInstance().getCurrentOrder().addPizza(selectedPizza);
+ 
+-            // Show confirmation
+             new AlertDialog.Builder(this)
+                     .setTitle("Added to Cart")
+                     .setMessage("Pizza added to your current order.")
+@@ -105,6 +156,9 @@
+         });
+     }
+ 
++    /**
++     * This method initializes the toppings UI with checkboxes for each topping
++     */
+     private void initializeToppings() {
+         toppingsContainer.removeAllViews();
+         for (Topping topping : Topping.values()) {
+@@ -141,10 +195,19 @@
+         }
+     }
+ 
++    /**
++     * This method updates the pizza price based on the current size and selected toppings
++     */
+     private void updatePizzaPrice() {
+         pizzaPrice.setText(String.format("$%.2f", selectedPizza.price()));
+     }
+ 
++    /**
++     * This is the getter method for the pizza image based on the pizza type
++     * @param type is the type of the pizza
++     * @param style is the style of the pizza (NY or Chicago)
++     * @return the image based on the type and style of the pizza
++     */
+     private int getPizzaImage(String type, String style) {
+         if (style.equals("Chicago Style")) {
+             switch (type) {
