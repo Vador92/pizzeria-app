@@ -146,7 +146,8 @@ public class PizzaDetailActivity extends AppCompatActivity {
     private void setupAddToCartButton() {
         Button addToCartButton = findViewById(R.id.addToCartButton);
         addToCartButton.setOnClickListener(v -> {
-            OrderManager.getInstance().getCurrentOrder().addPizza(selectedPizza);
+            Pizza copyPizza = selectedPizza.copyPizza();
+            OrderManager.getInstance().getCurrentOrder().addPizza(copyPizza);
 
             new AlertDialog.Builder(this)
                     .setTitle("Added to Cart")
