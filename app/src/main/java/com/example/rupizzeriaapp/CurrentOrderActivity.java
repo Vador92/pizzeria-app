@@ -11,7 +11,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 
 /**
- * This is the Current Order Activity class, which manages the frontend responses
+ * This is the Current Order Activity class, which manages the frontend responses on the Current Order Page
  * This class changes the data shown in the frontend based on the backend data processing
  * @author Varun Doreswamy, Yuet Yue
  */
