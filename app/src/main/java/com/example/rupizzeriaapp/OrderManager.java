@@ -1,11 +1,10 @@
 package com.example.rupizzeriaapp;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class OrderManager {
     private static OrderManager instance; // Singleton instance
-    private List<Order> orders;           // Holds all placed orders
+    private ArrayList<Order> orders;           // Holds all placed orders
     private Order currentOrder;           // Holds the current active order
     private int orderId;                  // Auto-incremented order ID
 
@@ -28,7 +27,7 @@ public class OrderManager {
         return currentOrder;
     }
 
-    public List<Order> getOrders() {
+    public ArrayList<Order> getOrders() {
         return orders;
     }
 
