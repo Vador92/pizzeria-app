@@ -10,4 +10,20 @@
     <string name="pizza_image">Pizza image</string>
     <string name="pizza_title">Pizza Title</string>
     <string name="select_order_number">Select Order Number</string>
+    <string name="subtotal">Subtotal $</string>
+    <string name="sales_tax">Sales Tax $</string>
+    <string name="order_total">Order Total $</string>
+    <string name="back">← Back</string>
+    <string name="clear_order">Clear Order</string>
+    <string name="place_order">Place Order</string>
+    <string name="order_number">Order Number:</string>
+    <string name="remove_pizza">Remove Pizza</string>
+    <string name="cancel_order">Cancel Order</string>
+    <string name="export_orders">Export Orders</string>
+    <string name="add_to_cart">Add to Cart</string>
+    <string name="crust">Crust</string>
+    <string name="price">Price</string>
+    <string name="pizza_name">Pizza Name</string>
+    <string name="total_price_after_taxes">Total Price (after taxes): $</string>
+    <string name="select_a_pizza">Select a Pizza</string>
 </resources>

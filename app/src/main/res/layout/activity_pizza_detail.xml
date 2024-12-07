@@ -25,7 +25,7 @@
                 android:id="@+id/backButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="← Back"
+                android:text="@string/back"
                 android:backgroundTint="#FFFFFF"
                 android:textColor="#333333"
                 android:textSize="14sp"
@@ -40,14 +40,14 @@
                 android:layout_width="match_parent"
                 android:layout_height="200dp"
                 android:scaleType="centerCrop"
-                android:contentDescription="Pizza Image" />
+                android:contentDescription="@string/pizza_image" />
 
             <!-- Pizza Name -->
             <TextView
                 android:id="@+id/pizzaName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Pizza Name"
+                android:text="@string/pizza_name"
                 android:textSize="24sp"
                 android:textStyle="bold"
                 android:paddingTop="8dp"
@@ -58,7 +58,7 @@
                 android:id="@+id/pizzaPrice"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Price"
+                android:text="@string/price"
                 android:textSize="18sp"
                 android:paddingBottom="4dp" />
 
@@ -67,7 +67,7 @@
                 android:id="@+id/pizzaCrust"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Crust"
+                android:text="@string/crust"
                 android:textSize="16sp"
                 android:paddingBottom="8dp" />
 
@@ -97,7 +97,7 @@
         android:id="@+id/addToCartButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Add to Cart"
+        android:text="@string/add_to_cart"
         android:textColor="@android:color/white"
         android:textSize="18sp"
         app:layout_constraintBottom_toBottomOf="parent"
