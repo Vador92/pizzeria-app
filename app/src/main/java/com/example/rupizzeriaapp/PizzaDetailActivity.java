@@ -37,6 +37,12 @@ public class PizzaDetailActivity extends AppCompatActivity {
         toppingsContainer = findViewById(R.id.toppingsContainer);
         Button addToCartButton = findViewById(R.id.addToCartButton);
 
+        // Initialize the Back Button
+        Button backButton = findViewById(R.id.backButton);
+
+        // Set OnClickListener for the Back Button
+        backButton.setOnClickListener(v -> finish());
+
         // Get the selected pizza from Intent
         selectedPizza = (Pizza) getIntent().getSerializableExtra("selectedPizza");
         if (selectedPizza == null) {
@@ -90,16 +96,11 @@ public class PizzaDetailActivity extends AppCompatActivity {
             // Add the pizza to the current order
             OrderManager.getInstance().getCurrentOrder().addPizza(selectedPizza);
 
-            // Show simple confirmation dialog
+            // Show confirmation
             new AlertDialog.Builder(this)
                     .setTitle("Added to Cart")
-                    .setMessage("Pizza added to your order.")
-                    .setPositiveButton("OK", (dialog, which) -> {
-                        // Navigate back to PizzaActivity
-                        Intent intent = new Intent(PizzaDetailActivity.this, PizzaActivity.class);
-                        startActivity(intent);
-                        finish();
-                    })
+                    .setMessage("Pizza added to your current order.")
+                    .setPositiveButton("OK", (dialog, which) -> dialog.dismiss())
                     .show();
         });
     }

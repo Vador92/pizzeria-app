@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    android:background="#8A3733">
+    android:background="@color/white">
 
     <!-- Back Button -->
     <Button
-        android:id="@+id/buttonBack"
+        android:id="@+id/backButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Back"
-        android:backgroundTint="#D32F2F"
-        android:textColor="#FFFFFF"
-        android:elevation="4dp"
+        android:text="← Back"
+        android:backgroundTint="#FFFFFF"
+        android:textColor="#333333"
+        android:textSize="14sp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
@@ -27,11 +30,11 @@
         android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:text="Store Orders"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="28sp"
         android:textStyle="bold"
         android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/buttonBack"
+        app:layout_constraintTop_toBottomOf="@id/backButton"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
@@ -41,7 +44,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Order Number:"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="16sp"
         app:layout_constraintTop_toBottomOf="@id/textViewTitle"
         app:layout_constraintStart_toStartOf="parent" />
@@ -51,7 +54,8 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_spinner"
+        android:background="@android:color/white"
+        android:padding="8dp"
         app:layout_constraintTop_toBottomOf="@id/textViewOrderNumberLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
@@ -63,7 +67,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:text="Order Summary"
-        android:textColor="#FFFFFF"
+        android:textColor="@color/white"
         android:textSize="16sp"
         android:textStyle="bold"
         app:layout_constraintTop_toBottomOf="@id/spinnerOrderNumber"
@@ -74,39 +78,45 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginTop="8dp"
-        android:background="#FFFFFF"
+        android:background="@android:color/white"
         android:elevation="4dp"
         app:layout_constraintTop_toBottomOf="@id/textViewOrderSummaryLabel"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/textViewOrderTotalLabel" />
+        app:layout_constraintBottom_toTopOf="@id/linearLayoutTotalPrice" />
 
-    <!-- Order Total -->
-    <TextView
-        android:id="@+id/textViewOrderTotalLabel"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Order Total (tax included):"
-        android:textColor="#FFFFFF"
-        android:textSize="16sp"
-        app:layout_constraintTop_toBottomOf="@id/recyclerViewOrderSummary"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <TextView
-        android:id="@+id/textViewOrderTotal"
+    <!-- Total Price Section -->
+    <LinearLayout
+        android:id="@+id/linearLayoutTotalPrice"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_background"
-        android:padding="12dp"
-        android:text="0.00"
-        android:textColor="#000000"
-        android:gravity="center"
-        app:layout_constraintTop_toBottomOf="@id/textViewOrderTotalLabel"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        app:layout_constraintTop_toBottomOf="@id/recyclerViewOrderSummary"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/linearLayoutButtons" />
+        app:layout_constraintBottom_toTopOf="@id/linearLayoutButtons">
+
+        <TextView
+            android:id="@+id/textViewOrderTotalLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Total Price (after taxes):"
+            android:textColor="@color/white"
+            android:textSize="16sp"
+            android:layout_marginEnd="8dp" />
+
+        <TextView
+            android:id="@+id/textViewOrderTotal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@drawable/rounded_background"
+            android:padding="8dp"
+            android:text="0.00"
+            android:textColor="@color/black"
+            android:gravity="center"
+            android:textSize="16sp" />
+    </LinearLayout>
 
     <!-- Buttons -->
     <LinearLayout
@@ -114,8 +124,6 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_marginTop="16dp"
-        android:layout_marginBottom="16dp"
         android:gravity="center"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -128,7 +136,7 @@
             android:layout_marginEnd="16dp"
             android:text="Cancel Order"
             android:backgroundTint="#D32F2F"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/white"
             android:elevation="4dp"
             android:paddingHorizontal="16dp" />
 
@@ -138,7 +146,7 @@
             android:layout_height="wrap_content"
             android:text="Export Orders"
             android:backgroundTint="#D32F2F"
-            android:textColor="#FFFFFF"
+            android:textColor="@color/white"
             android:elevation="4dp"
             android:paddingHorizontal="16dp" />
     </LinearLayout>
